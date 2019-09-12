@@ -11,11 +11,11 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet var emailTextField: UITextField!
-    
-    var emailTextFields: String = ""
+
     
     @IBOutlet var passwordTextField: UITextField!
     
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,13 +25,21 @@ class ViewController: UIViewController {
     
     @IBAction func loginButton(_ sender: UIButton) {
         
+        if (emailTextField.text?.isValidEmail())! {
+            
+        
         let finalForward = storyboard?.instantiateViewController(withIdentifier: "FinalViewController") as! FinalViewController
         
         navigationController?.pushViewController(finalForward, animated: true)
         
     }
+        else {
+             let alert = UIAlertController(title: "Alert", message: "Please enter email address", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler:  nil ))
+            self.present(alert, animated: true, completion: nil)
+        }
     
-    
+    }
     @IBAction func signUpButton(_ sender: UIButton) {
         
      let next = storyboard?.instantiateViewController(withIdentifier: "NextViewController") as! NextViewController
@@ -49,3 +57,10 @@ class ViewController: UIViewController {
 
 }
 
+extension String {
+    func isValidEmail() -> Bool {
+        // here, `try!` will always succeed because the pattern is valid
+        let regex = try! NSRegularExpression(pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", options: .caseInsensitive)
+        return regex.firstMatch(in: self, options: [], range: NSRange(location: 0, length: count)) != nil
+    }
+}
