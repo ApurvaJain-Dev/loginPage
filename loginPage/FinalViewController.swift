@@ -10,9 +10,45 @@ import UIKit
 
 class FinalViewController: UIViewController {
 
+    @IBOutlet var firstNameLabel: UILabel!
+    
+    
+    @IBOutlet var lastNameLabel: UILabel!
+    
+    
+    @IBOutlet var emailLabel: UILabel!
+    
+    
+    @IBOutlet var locationLabel: UILabel!
+    
+    
+    @IBOutlet var mobileNumberLabel: UILabel!
+    
+    
+    @IBOutlet var pinCodeLabel: UILabel!
+    
+    
+    @IBOutlet var passwordLabel: UILabel!
+    
+    
+    @IBOutlet var confirmPasswordLabel: UILabel!
+    
+    var userDetails : [String : String]!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        self.title = "Welcome " + userDetails["FirstName"]!
+        firstNameLabel.text = "First Name : " + userDetails["FirstName"]!
+        lastNameLabel.text = "Last Name : " + userDetails["SecondName"]!
+        emailLabel.text = "Email : " + userDetails["email"]!
+        locationLabel.text = "Location : " + userDetails["location"]!
+        mobileNumberLabel.text = "Mobile Number : " + userDetails["mobile"]!
+        pinCodeLabel.text = "Pin Code : " + userDetails["pinCode"]!
+       
+        
         // Do any additional setup after loading the view.
     }
 

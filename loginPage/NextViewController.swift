@@ -79,9 +79,15 @@ class NextViewController: UIViewController {
         }
         if  (passwordSignUpText.text == confirmPasswordText.text) {
             print("password is correct")
-            let login = storyboard?.instantiateViewController(withIdentifier: "ViewController") as! ViewController
             
-            navigationController?.pushViewController(login, animated: true)
+            let userDictionary = ["FirstName" : firstNameText.text, "SecondName" : lastNameText.text,"email" :  emailSignUpText.text, "location" : locationText.text, "mobile" :  mobileNumberText.text, "pinCode" : pinCodeText.text, "password" : passwordSignUpText.text, "confirmPassword" : confirmPasswordText.text]
+            
+            let finalVC = storyboard?.instantiateViewController(withIdentifier: "FinalViewController") as! FinalViewController
+            
+            finalVC.userDetails = userDictionary as! [String : String]
+            navigationController?.pushViewController(finalVC, animated: true)
+            
+            
         }
         else {
             let alert = UIAlertController(title: "Alert", message: "Enter both the password", preferredStyle: .alert)
